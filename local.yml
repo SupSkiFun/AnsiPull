@@ -1,5 +1,6 @@
-# Version for older ansible; with_items instead of loop
-# and zero full builtin name
+# For Testing Ansible Pull
+# For newer ansible
+
 ---
 - hosts: localhost
   gather_facts: false
@@ -7,18 +8,18 @@
   become_method: sudo
   tasks:
     - name: Install Apache
-      apt:
+      ansible.builtin.apt:
         name: apache2
         state: present
     - name: Start Apache
-      service:
+      ansible.builtin.service:
         name: apache2
         state: started
     - name: Copy Files
-      copy:
+      ansible.builtin.copy:
         src: "{{ item }}"
         dest: "/var/www/html/{{ item }}"
-      with_items:
+      loop:
         - index.html
         - error.html
         - PShellGirl.jpg
